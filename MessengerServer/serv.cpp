@@ -8,6 +8,7 @@ serv::serv(int nPort,QObject *parent) :
     if ( !ptcpServer->listen(QHostAddress::Any, nPort) ){
         qDebug() << "Server error. Unable to start the server: " + ptcpServer->errorString();
         ptcpServer->close();
+
         return;
     }
 
