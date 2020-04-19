@@ -143,9 +143,9 @@ bool serv::isUserAuthorized(QString *user_ip){
 void serv::slotNewConnection()
 {
     QTcpSocket* pClientSocket = ptcpServer->nextPendingConnection();
-    connect(this, SIGNAL( signalDeleteLater() ),
+    /*connect(this, SIGNAL( signalDeleteLater() ),
             pClientSocket, SLOT(deleteLater())
-            );
+            );*/
     connect(pClientSocket, SIGNAL(disconnected()),
             this, SLOT( slotDisconnected() )
             );
@@ -258,7 +258,8 @@ void serv::slotDisconnected(){
     if (!query.exec(str)){
         qDebug() << "Error updating database!" + query.lastError().text();
     }
-    emit signalDeleteLater();
+    //emit signalDeleteLater();
+    pClientSocket->deleteLater();
 }
 
 
